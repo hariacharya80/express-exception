@@ -1,6 +1,7 @@
-import { Application } from "express";
+import { Application, Request, Response } from "express";
 import { handleExceptions } from "./handler.util";
 import { TexceptionHandlerConfig } from "types/exceptionHandler.types";
+import NotFoundException from "exceptions/notFound.exception";
 
 /**
  *  Set a express application to use express-exceptions handler,
@@ -24,7 +25,9 @@ export function setHandler(app: Application, config?: TexceptionHandlerConfig): 
   }
 
   app.use(handleExceptions);
-
+  app.use('*', (_req: Request, _res: Response) => {
+    throw new NotFoundException()
+  })
   if (!config) return;
   if (config.logFn && typeof config.logFn !== "function") {
     throw new Error('Error: Logger function must be callable');

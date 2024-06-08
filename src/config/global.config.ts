@@ -1,4 +1,6 @@
-export const ExceptionMessage = {
+import { TExceptionMessage } from "../types/exceptionMessage.types";
+
+export const ExceptionMessage: TExceptionMessage = {
   BadRequestError: 'Bad request',
   UnauthorizedError: 'Unauthorized',
   PaymentRequiredError: 'Payment required',

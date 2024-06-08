@@ -1,11 +1,15 @@
-import { configureMessage } from "./utils/configureMessage.util";
+import { setExceptionMessage } from "./utils/configureMessage.util";
 import { setHandler } from "./utils/setHandler.util";
-import HttpException from './exceptions/http.exception'
+import CustomHttpException from './exceptions/http.exception'
+import BadRequestException from './exceptions/badrequest.exception'
+import UnauthorizedException from './exceptions/unauthorized.exception'
+import PaymentRequiredException from './exceptions/paymentRequired.exception'
 
-const e = {
-  setMessage: configureMessage,
-  handler: setHandler
+export {
+  setExceptionMessage,
+  setHandler,
+  CustomHttpException,
+  BadRequestException,
+  UnauthorizedException,
+  PaymentRequiredException
 }
-
-export { HttpException }
-export default e;

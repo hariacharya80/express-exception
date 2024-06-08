@@ -51,3 +51,5 @@ export function setHandler(app: Application, config?: TexceptionHandlerConfig): 
 
   return;
 }
+
+export default setHandler;

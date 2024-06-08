@@ -1,4 +1,4 @@
-import { setHandler } from "./utils/setHandler.util";
+import setHandler from "./utils/setHandler.util";
 import CustomHttpException from "./exceptions/http.exception";
 import BadRequestException from './exceptions/badrequest.exception'
 import UnauthorizedException from './exceptions/badrequest.exception'

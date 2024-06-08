@@ -1,8 +1,9 @@
+
 import { ExceptionMessage } from "../config/global.config";
 import HttpException from "./http.exception";
 
-export default class ConflictException extends HttpException {
+export default class PayloadTooLargeException extends HttpException {
   constructor(message?: string, status?: number) {
-    super(message ? message : ExceptionMessage.ConflictError, status ? status : 409)
+    super(message ? message : ExceptionMessage.PayloadTooLargeError, status ? status : 413)
   }
 }

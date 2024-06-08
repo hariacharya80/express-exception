@@ -11,12 +11,12 @@ export type TExceptionMessage = {
   ConflictError: string;
   GoneError: string;
   LengthRequiredError: string;
-  PreconditionError: string;
+  PreconditionFailedError: string;
   PayloadTooLargeError: string;
   UriTooLongError: string;
   UnsupportedMediaError: string;
   RangeTooLongError: string;
-  ExceptionFailedError: string;
+  ExpectationFailedError: string;
   TeapotError: string;
   MisdirectedError: string;
   UnprocessableError: string;

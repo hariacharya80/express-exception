@@ -6,6 +6,7 @@ export async function handleExceptions(error: unknown, _req: Request, res: Respo
   if (!error) {
     return next()
   }
+  console.error(error)
   if (error instanceof HttpException) {
     return res.status(error.status).json({ message: error.message })
   }

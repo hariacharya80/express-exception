@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from "express";
 import { ExceptionMessage } from "../config/global.config";
 import HttpException from "../exceptions/http.exception";
 import { handlerConfig } from "./setHandler.util";
-import { Logger } from "types/exceptionHandler.types";
 
 export async function handleExceptions(error: unknown, _req: Request, res: Response, next: NextFunction) {
   try {
@@ -11,10 +10,11 @@ export async function handleExceptions(error: unknown, _req: Request, res: Respo
       return next()
     }
 
-    if (handlerConfig.logger === Logger.DEFAULT) {
+    if (typeof handlerConfig.logFn !== "function") {
       console.error(error)
+    } else {
+      handlerConfig.logFn(error);
     }
-
     if (error instanceof HttpException) {
       return res.status(error.status).json({ [`${handlerConfig.responseErrorKey}`]: error.message })
     }

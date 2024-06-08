@@ -1,6 +1,6 @@
 import { Application } from "express";
 import { handleExceptions } from "./handler.util";
-import { Logger, TexceptionHandlerConfig } from "types/exceptionHandler.types";
+import { TexceptionHandlerConfig } from "types/exceptionHandler.types";
 
 /**
  *  Set a express application to use express-exceptions handler,
@@ -13,7 +13,6 @@ import { Logger, TexceptionHandlerConfig } from "types/exceptionHandler.types";
  */
 
 export const handlerConfig: TexceptionHandlerConfig = {
-  logger: Logger.DEFAULT, // kept logger option,  TODO: implement some production grade logger to support this package automatically
   logFn: null,
   bypassUnknownExceptions: false,
   responseErrorKey: 'message'
@@ -27,17 +26,11 @@ export function setHandler(app: Application, config?: TexceptionHandlerConfig): 
   app.use(handleExceptions);
 
   if (!config) return;
-
-  if (config.logger !== Logger.DEFAULT && !config.logFn) {
-    throw new Error('Custom Logger needs a logger function!')
+  if (config.logFn && typeof config.logFn !== "function") {
+    throw new Error('Error: Logger function must be callable');
   }
 
-  if (config.logFn && (!config.logger || config.logger !== Logger.CUSTOM)) {
-    console.warn('Warning: logger function will not be used since default logger is enabled!')
-  }
-
-  if (config.logFn && config.logger == Logger.CUSTOM) {
-    handlerConfig.logger = Logger.CUSTOM;
+  if (config.logFn) {
     handlerConfig.logFn = config.logFn;
   }
 

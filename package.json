@@ -1,6 +1,6 @@
 {
   "name": "express-exception",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "main": "dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -8,10 +8,21 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsup"
   },
-  "keywords": [],
-  "author": "",
+  "repository": {
+  "type": "git",
+  "url": "https://github.com/hariacharya80/express-exception.git"
+  },
+  "keywords": [
+    "express",
+    "exception",
+    "error",
+    "handler",
+    "middleware",
+    "typescript"
+  ],
+  "author": "Hari Acharya",
   "license": "ISC",
-  "description": "",
+  "description": "Exprss middleware to handle exceptions and errors, contains collection of exception classes and middleware to handle them.",
   "devDependencies": {
     "@types/express": "^4.17.21",
     "tsup": "^8.1.0",

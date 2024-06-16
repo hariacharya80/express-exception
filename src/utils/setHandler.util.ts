@@ -23,11 +23,10 @@ export function setHandler(app: Application, config?: TexceptionHandlerConfig): 
   if (!app) {
     throw new Error('Please provide express application to handle exceptions for');
   }
-
-  app.use(handleExceptions);
   app.use('*', (_req: Request, _res: Response) => {
     throw new NotFoundException()
   })
+  app.use(handleExceptions);
   if (!config) return;
   if (config.logFn && typeof config.logFn !== "function") {
     throw new Error('Error: Logger function must be callable');

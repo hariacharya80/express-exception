@@ -7,7 +7,8 @@ export async function handleExceptions(error: unknown, _req: Request, res: Respo
   try {
 
     if (!error) {
-      return next()
+      next()
+      return;
     }
 
     if (typeof handlerConfig.logFn !== "function") {
@@ -16,17 +17,21 @@ export async function handleExceptions(error: unknown, _req: Request, res: Respo
       handlerConfig.logFn(error);
     }
     if (error instanceof HttpException) {
-      return res.status(error.status).json({ [`${handlerConfig.responseErrorKey}`]: error.message })
+      res.status(error.status).json({ [`${handlerConfig.responseErrorKey}`]: error.message })
+      return;
     }
 
     if (handlerConfig.bypassUnknownExceptions) {
-      return next(error);
+      next(error);
+      return;
     }
 
-    return res.status(500).json({ [`${handlerConfig.responseErrorKey}`]: ExceptionMessage.InternalServerError })
+    res.status(500).json({ [`${handlerConfig.responseErrorKey}`]: ExceptionMessage.InternalServerError })
+    return;
   } catch (error) {
     //INFO: If for some mysterious reason, the above functions failed. We return an generic error to prevent downtime.
     console.warn('Fatal: Exception Handler Encountered An Issue While Handling Exceptions!')
-    return res.status(500).json({ message: 'Internal Server Error' })
+    res.status(500).json({ message: 'Internal Server Error' })
+    return;
   }
 }

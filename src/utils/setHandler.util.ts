@@ -23,7 +23,7 @@ export function setHandler(app: Application, config?: TexceptionHandlerConfig): 
   if (!app) {
     throw new Error('Please provide express application to handle exceptions for');
   }
-  app.use('*', (_req: Request, _res: Response) => {
+  app.all('/:notFound', (_req: Request, _res: Response) => {
     throw new NotFoundException()
   })
   app.use(handleExceptions);
